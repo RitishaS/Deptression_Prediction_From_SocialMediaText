@@ -1,0 +1,33 @@
+# Large model and data files
+*.pkl
+*.pickle
+preprocessed_data.csv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Package files
+dist/
+build/
+*.egg-info/
