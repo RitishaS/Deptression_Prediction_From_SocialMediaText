@@ -197,29 +197,14 @@ def display_statistics(df):
     logger.info("\nLabel distribution:")
     logger.info(df['label'].value_counts())
 
-def save_data(df, X, y, vectorizer, output_dir):
-    """Save preprocessed data and vectorizer."""
+
+def save_data(df, output_dir):
+    """Save preprocessed data (text and label only) to CSV."""
     try:
-        logger.info("\nSaving preprocessed data and vectorizer...")
-        
-        csv_file = os.path.join(output_dir, "preprocessed_data.csv")
-        pkl_file = os.path.join(output_dir, "preprocessed_data.pkl")
-        
-        df.to_csv(csv_file, index=False)
-        
-        preprocessed_data = {
-            'X': X.toarray(),
-            'y': y,
-            'vectorizer': vectorizer,
-            'feature_names': vectorizer.get_feature_names_out()
-        }
-        
-        with open(pkl_file, "wb") as f:
-            pickle.dump(preprocessed_data, f)
-        
+        logger.info("\nSaving preprocessed data (text and label only)...")
+        csv_file = os.path.join(output_dir, "preprocessed_data_no_tfidf.csv")
+        df[['text', 'label']].to_csv(csv_file, index=False)
         logger.info(f"Preprocessed data saved to {csv_file}")
-        logger.info(f"Vectorizer saved to {pkl_file}")
-        
     except IOError as e:
         logger.error(f"Error saving data: {e}")
         sys.exit(1)
@@ -239,12 +224,11 @@ def main():
         # Display statistics
         display_statistics(df)
         
-        # Vectorize and save
-        X, y, vectorizer = vectorize_data(df)
-        save_data(df, X, y, vectorizer, script_dir)
-        
-        logger.info("\nPreprocessing complete!")
-        
+
+        # Save only preprocessed text and label (no TF-IDF)
+        save_data(df, script_dir)
+        logger.info("\nPreprocessing complete! (No TF-IDF)")
+
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
         sys.exit(1)
