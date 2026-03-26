@@ -203,8 +203,18 @@ def save_data(df, output_dir):
     try:
         logger.info("\nSaving preprocessed data (text and label only)...")
         csv_file = os.path.join(output_dir, "preprocessed_data_no_tfidf.csv")
+        pkl_file = os.path.join(output_dir, "preprocessed_data_no_tfidf.pkl")
+        # Save CSV
         df[['text', 'label']].to_csv(csv_file, index=False)
+        # Save as pickle (dict with text and label)
+        preprocessed_data = {
+            'text': df['text'].tolist(),
+            'label': df['label'].tolist()
+        }
+        with open(pkl_file, "wb") as f:
+            pickle.dump(preprocessed_data, f)
         logger.info(f"Preprocessed data saved to {csv_file}")
+        logger.info(f"Preprocessed pickle saved to {pkl_file}")
     except IOError as e:
         logger.error(f"Error saving data: {e}")
         sys.exit(1)

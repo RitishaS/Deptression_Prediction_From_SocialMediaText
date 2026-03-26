@@ -5,6 +5,10 @@ preprocessed_data.csv
 preprocessed.csv
 preprocessed_dataset.csv
 
+# Ignore new preprocessed files (no TF-IDF)
+preprocessed_data_no_tfidf.csv
+preprocessed_data_no_tfidf.pkl
+
 # Python cache
 __pycache__/
 *.py[cod]
