@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Level Analyzer - Find Support</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">💙</span>
+                <span class="logo-text">Depression Level Analyzer</span>
+            </div>
+            <p class="nav-subtitle">Your journey to wellness starts here</p>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Understand Your Emotions</h1>
+            <p class="hero-subtitle">Share your thoughts and get personalized insights to support your mental well-being</p>
+        </section>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-card">
+                <h2>What's on your mind?</h2>
+                <p class="input-hint">Your privacy is our priority. All data is processed securely.</p>
+                
+                <form id="predictionForm" class="form-group">
+                    <textarea 
+                        id="userText" 
+                        class="textarea" 
+                        placeholder="Type or paste your thoughts here... (Share whatever is on your mind)"
+                        rows="8"
+                        required
+                    ></textarea>
+                    
+                    <div class="char-count">
+                        <span id="charCount">0</span> / 1000 characters
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Analyze My Text</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingSpinner" class="loading-container hidden">
+            <div class="spinner"></div>
+            <p class="loading-text">Analyzing your thoughts...</p>
+            <p class="loading-subtext">This helps us understand and support you better</p>
+        </div>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section hidden">
+            
+            <!-- Severity Card -->
+            <div class="result-card severity-card fade-in">
+                <div class="card-header">
+                    <h3>Depression Severity Level</h3>
+                    <span class="card-icon">📊</span>
+                </div>
+                <div class="severity-content">
+                    <div class="severity-badge" id="severityBadge"></div>
+                    <p class="severity-label" id="severityLabel"></p>
+                    <p class="severity-description" id="severityDescription"></p>
+                </div>
+            </div>
+
+            <!-- Risk Score Card -->
+            <div class="result-card risk-card fade-in animation-delay-1">
+                <div class="card-header">
+                    <h3>Mental Health Risk Score</h3>
+                    <span class="card-icon">⚠️</span>
+                </div>
+                <div class="risk-content">
+                    <div class="risk-gauge">
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" id="gaugeFill"></div>
+                        </div>
+                        <div class="gauge-labels">
+                            <span>0</span>
+                            <span id="riskScore">0</span>
+                            <span>100</span>
+                        </div>
+                    </div>
+                    <p class="risk-interpretation" id="riskInterpretation"></p>
+                </div>
+            </div>
+
+            <!-- Emotion Card -->
+            <div class="result-card emotion-card fade-in animation-delay-2">
+                <div class="card-header">
+                    <h3>Detected Emotion</h3>
+                    <span class="card-icon">🎭</span>
+                </div>
+                <div class="emotion-content">
+                    <p class="emotion-emoji" id="emotionEmoji"></p>
+                    <p class="emotion-text" id="emotionText"></p>
+                    <p class="emotion-description" id="emotionDescription"></p>
+                </div>
+            </div>
+
+            <!-- Suicide Risk Alert (High Risk Only) -->
+            <div id="suicideRiskAlert" class="result-card alert-card high-risk hidden fade-in animation-delay-3">
+                <div class="card-header alert-header">
+                    <h3>⚠️ Important Safety Notice</h3>
+                </div>
+                <div class="alert-content">
+                    <p class="alert-text">We've detected indicators suggesting you might be experiencing significant distress.</p>
+                    <p class="alert-subtext">You're not alone. Please reach out for support:</p>
+                    <div class="crisis-resources">
+                        <a href="tel:988" class="resource-link">
+                            <span class="resource-icon">📞</span>
+                            <span>Call 988 (US Suicide & Crisis Lifeline)</span>
+                        </a>
+                        <a href="https://www.crisistextline.org/" target="_blank" class="resource-link">
+                            <span class="resource-icon">💬</span>
+                            <span>Text HOME to 741741 (Crisis Text Line)</span>
+                        </a>
+                        <a href="https://www.international.findahelpline.com/" target="_blank" class="resource-link">
+                            <span class="resource-icon">🌍</span>
+                            <span>Find Helpline in Your Country</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coping Strategies Card -->
+            <div class="result-card strategies-card fade-in animation-delay-4">
+                <div class="card-header">
+                    <h3>Personalized Support Strategies</h3>
+                    <span class="card-icon">🌿</span>
+                </div>
+                <div class="strategies-content">
+                    <ul class="strategies-list" id="strategiesList"></ul>
+                </div>
+            </div>
+
+            <!-- New Analysis Button -->
+            <div class="new-analysis-section fade-in animation-delay-5">
+                <button class="btn btn-secondary" id="newAnalysisBtn">
+                    <span class="btn-text">Run Another Analysis</span>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message hidden"></div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">
+            💙 Remember: This is a supportive tool, not a substitute for professional mental health care. 
+            <br>If you're struggling, please reach out to a mental health professional.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
